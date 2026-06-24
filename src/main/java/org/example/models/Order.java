@@ -8,14 +8,11 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-
     private int orderId;
     private int productId;
     private int quantity;
     private LocalDateTime orderDate;
     private String status;
-
-
 
     @Override
     public String toString() {

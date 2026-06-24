@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.lang.Character.toLowerCase;
+
 public class ReportService {
     public void top5Expensive(List<Product> products) {
         products.stream()
@@ -17,7 +19,9 @@ public class ReportService {
     public void groupByCategory(List<Product> products) {
         Map<String, List<Product>> grouped =
                 products.stream()
-                        .collect(Collectors.groupingBy(Product::getCategory));
+                        .collect(Collectors.groupingBy(
+                                p -> p.getCategory().toLowerCase()
+                        ));
 
         grouped.forEach((category, list) -> {
             System.out.println("\nCategory: " + category);
@@ -36,6 +40,6 @@ public class ReportService {
                 .mapToDouble(p -> p.getQuantity() * p.getPrice())
                 .sum();
 
-        System.out.println("Total Inventory Value: " + totalValue);
+        System.out.printf("Total Inventory Value: %.2f%n", totalValue);
     }
 }
